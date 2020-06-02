@@ -2,7 +2,18 @@ var http = require('http');
 var path = require('path');
 var express = require('express');
 
+var mongoose = require('mongoose');
 var app = express();
+
+mongoose.connect('mongodb://localhost:27017/chatapp',
+  function(err){
+    if(err){
+      console.error(err);
+    }else{
+      console.log("Successfully connected to MongoDB.");
+    }
+});
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
