@@ -25,7 +25,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.get("/",function(req, res, next) {
-	return res.render('index', {title: 'Hello World'});
+  Message.find({}, function(err, msgs){
+	  if(err) throw err;
+	  return res.render('index', {messages: msgs});
+  });
 });
 
 app.get("/update",function(req, res, next) {
