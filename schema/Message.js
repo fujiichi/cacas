@@ -5,4 +5,4 @@ var Message = mongoose.Schema({
   date: {type: Date, default: new Date()}
 });
 
-module.exports = mongoose.model('message', Message);
+module.exports = mongoose.model('Message', Message);

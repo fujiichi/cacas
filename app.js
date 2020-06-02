@@ -1,6 +1,9 @@
+"use strict";
+
 var http = require('http');
 var express = require('express');
 var path = require('path');
+var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 
 var Message = require('./schema/Message');
@@ -16,6 +19,7 @@ mongoose.connect('mongodb://localhost:27017/chatapp',
     }
 });
 
+app.use(bodyparser());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -34,8 +38,10 @@ app.get("/hoge",function(req, res, next) {
 
 app.post("/update", function(req, res, next) {
   var newMessage = new Message({
-    username: res.body.username,
-    message: res.body.message
+    username: req.body.username,
+    message: req.body.message
+    //username: "foo",
+    //message: "bar"
   });
   newMessage.save((err)=>{
     if(err) throw err;
