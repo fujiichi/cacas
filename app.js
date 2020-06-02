@@ -1,8 +1,10 @@
 var http = require('http');
-var path = require('path');
 var express = require('express');
-
+var path = require('path');
 var mongoose = require('mongoose');
+
+var Message = require('./schema/Message');
+
 var app = express();
 
 mongoose.connect('mongodb://localhost:27017/chatapp',
@@ -22,8 +24,23 @@ app.get("/",function(req, res, next) {
 	return res.render('index', {title: 'Hello World'});
 });
 
+app.get("/update",function(req, res, next) {
+	return res.render('update');
+});
+
 app.get("/hoge",function(req, res, next) {
 	return res.send('hoge');
+});
+
+app.post("/update", function(req, res, next) {
+  var newMessage = new Message({
+    username: res.body.username,
+    message: res.body.message
+  });
+  newMessage.save((err)=>{
+    if(err) throw err;
+    return res.redirect("/");
+  });
 });
 
 var server = http.createServer(app);
