@@ -4,7 +4,8 @@ html(lang="ja")
     meta(charaset="utf-8")
   body
     h1 Save Message
-    form(action="update" method="POST")
+    form(action="update" method="POST" encType="multipart/form-data")
       input(type="text" name="username" placeholder="Name")
       textarea(placeholder="Message" name="message")
+      input(type="file" name="image")
       button(type="submit") Submit

@@ -1,0 +1,11 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="utf-8")
+  body
+    h1 UserRegistration
+      form(action="/signin"  method="POST"  encType="multipart/form-data")
+      input(type="text"  name="username"  placeholder="Name")
+      input(type="text"  name="password"  placeholder="Password")
+      input(type="file"  name="avater"  )
+      button(type="submit") Submit
